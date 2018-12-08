@@ -32,3 +32,14 @@ sleep[complete.cases(sleep),] #rows which are complete
 sleep[!complete.cases(sleep),] # rows which are not compelte
 colSums(is.na(sleep)) #how many data missing inwhich columns
 rowSums(is.na(sleep)) #which row how many data are missing
+
+#missing values inserted on random location
+df1[sample(1:30, size=5),2] =NA
+df1
+complete.cases(df1)
+df1[!complete.cases(df1),2] = mean(df1$marks,na.rm=T) # 2 is column number
+df1  
+#use mice  package that can be used for missing values can be used for filling missing values across columns
+
+#remove missing rows
+df2= df1(complete.cases(df1))
