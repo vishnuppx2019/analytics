@@ -18,8 +18,9 @@ rpart.plot(tree1, cex=.8)
 #this is large tree, so prune it: check cp
 printcp(tree1) 
 #cp value should be chosen such that xerror is least. least is for 0.011 but it has many splits =14.
-prunetree = prune(tree1, cp=0.05) 
+prunetree = prune(tree1, cp=0.03) 
 table(data$ShelveLoc)
+table(data$Price >105.5, data$ShelveLoc)
 #here we have selected a different value to simplify the tree
 mean(data$Sales)
 prunetree
@@ -33,6 +34,8 @@ rpart.plot(prunetree, nn=T, cex=.8, type=4)
 #https://cran.r-project.org/web/packages/rpart.plot/rpart.plot.pdf
 #http://www.milbo.org/rpart-plot/prp.pdf
 
+
+library(deplyr)
 #Predict for test value
 (testdata = sample_n(data,2))
 (predictedSales=predict(prunetree, newdata=testdata, type='vector'))
